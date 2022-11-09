@@ -3,7 +3,22 @@ const userRouter = express.Router();
 const auth = require("../middlewares/auth");
 const Order = require("../models/order");
 const { Product } = require("../models/product");
-const User = require("../models/user");
+const  User = require("../models/user");
+
+
+
+userRouter.get("/api/user/search/:name", auth, async (req, res) => {
+  try {
+    const users = await User.find({
+      name: { $regex: req.params.name, $options: "i" },
+    });
+
+    res.json(users);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 
 userRouter.post("/api/add-to-cart", auth, async (req, res) => {
   try {
