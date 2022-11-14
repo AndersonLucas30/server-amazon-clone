@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
     required: true,
     type: String,
   },
+  category_user: {
+    required: true,
+    type: String,
+  },
   address: {
     type: String,
     default: "",
