@@ -3,6 +3,8 @@ const productRouter = express.Router();
 const auth = require("../middlewares/auth");
 const { Product } = require("../models/product");
 
+
+//Busca produtos por categoria
 productRouter.get("/api/products/", auth, async (req, res) => {
   try {
     const products = await Product.find({ category: req.query.category });

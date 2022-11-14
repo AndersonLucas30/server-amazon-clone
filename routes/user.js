@@ -19,6 +19,19 @@ userRouter.get("/api/user/search/:name", auth, async (req, res) => {
   }
 });
 
+// Busca usuários por categoria
+userRouter.get("/api/categoria/user", auth, async (req, res) => {
+  try {
+    const users = await User.find({ category_user: req.query.category_user });
+    res.json(users);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+
+
 
 userRouter.post("/api/add-to-cart", auth, async (req, res) => {
   try {
