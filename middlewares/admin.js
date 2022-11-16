@@ -5,13 +5,13 @@ const admin = async (req, res, next) => {
   try {
     const token = req.header("x-auth-token");
     if (!token)
-      return res.status(401).json({ msg: "No auth token, access denied" });
+      return res.status(401).json({ msg: "Sem token de autenticação, acesso negado." });
 
     const verified = jwt.verify(token, "passwordKey");
     if (!verified)
       return res
         .status(401)
-        .json({ msg: "Token verification failed, authorization denied." });
+        .json({ msg: "Falha na verificação do token, autorização negada." });
     const user = await User.findById(verified.id);
 /*     if (user.type == "user" || user.type == "seller") {
       return res.status(401).json({ msg: "You are not an admin!" });
